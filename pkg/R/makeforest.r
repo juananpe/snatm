@@ -86,7 +86,7 @@ make.forest <- function(corp, normalise.FUN=NULL, encoding="UTF-8") {
   if (sum(is.na(thread.ids)))
     stop("NAs in thread list")
 
-  Content <- sapply(sapply(corp, "Content"), paste,
+  Content <- sapply(sapply(corp, "content"), paste,
                     collapse = "\n")
 
   ## Provide consecutive identifiers for each message
@@ -94,10 +94,10 @@ make.forest <- function(corp, normalise.FUN=NULL, encoding="UTF-8") {
 
   ## Extract authors and headings from the corpus and build simple
   ## character vectors
-  authors <- sapply(corp, function (x) { Author(x)[1] } )
+  authors <- sapply(corp, function (x) { meta(x, tag="author")[1] } )
   attributes(authors) <- NULL
 
-  headings <- sapply(corp, function (x) { Heading(x)[1] } )
+  headings <- sapply(corp, function (x) { meta(x, tag="heading")[1] } )
   attributes(headings) <- NULL
 
   ## The forest collects unique (numeric) identifiers for every mail
